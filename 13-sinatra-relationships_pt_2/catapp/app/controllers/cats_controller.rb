@@ -6,6 +6,7 @@ class CatsController < ApplicationController
   end
 
   post "/cats" do
+    binding.pry
     cat = Cat.create(params[:cat])
     redirect "/cats/#{cat.id}"
   end

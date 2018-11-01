@@ -20,4 +20,16 @@ class HumansController < ApplicationController
     erb :"humans/show"
   end
 
+  get "/humans/:id/edit" do
+    @cats = Cat.all
+    @human = Human.find(params[:id])
+    erb :"humans/edit"
+  end
+
+  patch "/humans/:id" do
+    human = Human.find(params[:id])
+    human.update(params[:human])
+    redirect "/humans/#{human.id}"
+  end
+
 end

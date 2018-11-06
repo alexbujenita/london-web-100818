@@ -9,20 +9,22 @@ class DoctorsController < ApplicationController
 
   def new
     @doctor = Doctor.new
+    @offices = Office.all
+    @patients = Patient.all
   end
 
   def create
+    byebug
     @doctor = Doctor.create(doctor_params)
     byebug
     redirect_to doctor_path(@doctor)
-    # we will see! v4 vs v5
   end
 
   def edit
   end
 
   def update
-    @doctor.update(name: params[:doctor][:name], specialty: params[:doctor][:specialty])
+    @doctor.update(doctor_params)
     redirect doctor
   end
 
@@ -38,6 +40,6 @@ class DoctorsController < ApplicationController
   end
 
   def doctor_params
-    params.require(:doctor).permit(:name, :specialty)
+    params.require(:doctor).permit(:name, :specialty, {patient_ids: []}, :office_id)
   end
 end

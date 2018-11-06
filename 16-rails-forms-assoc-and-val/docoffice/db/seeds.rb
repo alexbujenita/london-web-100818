@@ -7,9 +7,27 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 Doctor.destroy_all
+Office.destroy_all
+Visit.destroy_all
+Patient.destroy_all
 
-Doctor.create(name: 'dr Wachira', specialty: 'the cookie guy')
-Doctor.create(name: 'dr Catchmarchoeck', specialty: 'Vet')
-Doctor.create(name: 'dr Rico', specialty: 'ummmmmmologist')
-Doctor.create(name: 'dr Lucy', specialty: 'DAGS')
-Doctor.create(name: 'dr Oliver', specialty: 'Students')
+office = Office.create(name: 'Spitalfields')
+Office.create(name: 'Ldn bridge')
+Office.create(name: 'Spychowo')
+Office.create(name: 'Moscow')
+
+w = Doctor.create(name: 'dr Ndagia', specialty: 'the cookie guy', office: office)
+
+pj = Patient.create(name: 'john')
+pm = Patient.create(name: 'mary')
+pj2 = Patient.create(name: 'joseph')
+pm2 = Patient.create(name: 'muhhamad')
+pk = Patient.create(name: 'krzysztof brzeczyszczykiewicz')
+
+Visit.create(doctor: w ,patient: pj)
+Visit.create(doctor: w ,patient: pj2)
+Visit.create(doctor: w ,patient: pm)
+Visit.create(doctor: w ,patient: pm2)
+Visit.create(doctor: w ,patient: pk)
+
+p 'everyting worked! seed OK'

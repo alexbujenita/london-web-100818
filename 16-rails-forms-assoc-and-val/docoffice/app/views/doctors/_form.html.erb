@@ -5,5 +5,18 @@
   <%= f.label :specialty %>
   <%= f.text_field :specialty %>
 
+  <%
+    # c_s takes 5 arguments, but 1 here is implicit cause we're in a form_for
+    # the implicit argument is the model that you create the c_s for.
+    # please ignore it! for all intents and purposes here, we don't care now
+    # 1 property of the target model that you want to set (doctor.office_id)
+    # 2 collection of stuff you want to choose from! (comes from the controller)
+    # 3 property that you want to use as a value for no.1 (doctor.office_id = office.id)
+    # 4 whatcha wanna show on the page (office.name)
+  %>
+  <%= f.collection_select(:office_id, @offices, :id, :name) %>
+
+  <%= f.collection_check_boxes(:patient_ids, @patients, :id, :name) %>
+
   <%= f.submit %>
 <% end %>

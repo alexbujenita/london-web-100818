@@ -14,9 +14,11 @@
     # 3 property that you want to use as a value for no.1 (doctor.office_id = office.id)
     # 4 whatcha wanna show on the page (office.name)
   %>
+  <br>
   <%= f.collection_select(:office_id, @offices, :id, :name) %>
 
+  <br>
   <%= f.collection_check_boxes(:patient_ids, @patients, :id, :name) %>
-
+  <br>
   <%= f.submit %>
 <% end %>

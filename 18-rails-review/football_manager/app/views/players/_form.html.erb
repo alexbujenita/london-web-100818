@@ -1,0 +1,15 @@
+<%= form_for @player do |f| %>
+<%= f.label :name %>
+<%= f.text_field :name %>
+
+<%= f.label :position %>
+<%= f.text_field :position %>
+
+<%= f.label :number %>
+<%= f.text_field :number %>
+
+<%= f.label :team %>
+<%= f.collection_select :team_id, @teams, :id, :name %>
+
+<%= f.submit %>
+<% end %>

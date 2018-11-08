@@ -1,0 +1,14 @@
+<h1>Edit Player - <%= @player.name %></h1>
+
+<%= render 'form' %>
+
+<%= link_to "Go Back", players_path %>
+
+<%= form_for @player, method: :delete do |f|%>
+<%= f.submit "Delete" %>
+<% end %>
+
+<%= link_to "Delete Player", player_path(@player), method: :delete %>
+
+<%= form_tag("/players/#{@player.id}", method: :delete) %>
+<%= submit_tag("delete") %>

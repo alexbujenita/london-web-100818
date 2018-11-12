@@ -1,0 +1,10 @@
+<h1>Player - <%= @player.name %></h1>
+<h1>Position - <%= @player.position %></h1>
+<h1>Number - <%= @player.number %></h1>
+<h1>Team - <%= @player.team.name %></h1>
+
+
+<%= link_to "Back to Index", players_path %>
+<%= link_to "Edit Player", edit_player_path(@player) %>
+
+

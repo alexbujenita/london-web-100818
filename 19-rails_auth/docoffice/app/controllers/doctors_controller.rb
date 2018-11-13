@@ -5,6 +5,7 @@ class DoctorsController < ApplicationController
   end
 
   def show
+    byebug
   end
 
   def new

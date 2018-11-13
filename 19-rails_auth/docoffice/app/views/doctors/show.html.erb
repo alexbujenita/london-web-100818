@@ -1,0 +1,19 @@
+<h1>This is <%= @doctor.name %>'s page</h1>
+<p>They work as a <%= @doctor.specialty %></p>
+<p>And their office is in <%= @doctor.office.name %></p>
+
+<% if @doctor.patients.length > 0 %>
+  <p>This doctor is treating following patients:</p>
+  <ul>
+    <% @doctor.patients.each do |p| %>
+      <li>
+        <%= p.name %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
+
+
+<%= link_to 'edit me', edit_doctor_path %>
+<%= link_to 'go back', doctors_path %>

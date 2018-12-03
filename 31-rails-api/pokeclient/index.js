@@ -27,7 +27,6 @@ const addPokemons = pokemons => {
   pokemons.forEach(pokemon => addPokemon(pokemon))
 }
 
-
 // listen to the form submission
 formEl.addEventListener('submit', event => {
   event.preventDefault()

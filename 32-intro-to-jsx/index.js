@@ -34,8 +34,7 @@ const App = props =>
 
 // a title Component, which is a function that accepts props
 // and returns a React element
-const Title = props => 
-  <h1 className='title' id='top-title'>{props.text}</h1>
+
   // React.createElement('h1', {className: 'title', id: 'top-title'}, props.text)
 
 // another component

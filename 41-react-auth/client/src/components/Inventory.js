@@ -30,6 +30,12 @@ class Inventory extends React.Component {
     flexWrap: 'wrap'
   }
 
+  componentDidMount () {
+    if (!this.props.username) {
+      this.props.history.push('/signin')
+    }
+  }
+
   render () {
     const { items } = this.state
 

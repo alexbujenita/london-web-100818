@@ -3,14 +3,23 @@ import React from 'react'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 
+import API from '../API'
+
 class SignInForm extends React.Component {
   state = {
     username: '',
     password: ''
   }
 
-  handleSubmit = () => {
-    console.log(this.state)
+  handleSubmit = async event => {
+    event.preventDefault()
+    const resp = await API.signin(this.state)
+    if (resp.error) {
+      alert(resp.error)
+    } else {
+      this.props.signin(resp.username)
+      this.props.history.push('/inventory')
+    }
   }
 
   handleChange = event =>

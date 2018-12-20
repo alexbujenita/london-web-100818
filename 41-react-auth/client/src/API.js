@@ -1,27 +1,27 @@
 class API {
-  static init () {
-    this.baseURL = 'http://localhost:3001'
-    this.signinURL = this.baseURL + '/signin'
-    this.validateURL = this.baseURL + '/validate'
-  }
-
   static signin (user) {
-    return fetch(this.signinURL, {
+    return fetch('http://localhost:3001/signin', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(user)
     }).then(resp => resp.json())
   }
 
-  static validate (username) {
-    return fetch(this.validateURL, {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({ username: username })
+  static validate () {
+    return this.get('http://localhost:3001/validate')
+  }
+
+  static getInventory () {
+    return this.get('http://localhost:3001/inventory')
+  }
+
+  static get (url) {
+    return fetch(url, {
+      headers: {
+        'Authorization': localStorage.getItem('token')
+      },
     }).then(resp => resp.json())
   }
 }
-
-API.init()
 
 export default API

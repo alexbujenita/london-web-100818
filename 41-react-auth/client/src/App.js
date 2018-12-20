@@ -1,46 +1,38 @@
 import React, { Component } from 'react'
-import { Route, Switch, withRouter } from 'react-router-dom'
+import { Route, withRouter, Switch } from 'react-router-dom'
 
 import Header from './components/Header'
 import SignInForm from './components/SignInForm'
 import Inventory from './components/Inventory'
-import HomePage from './components/HomePage'
-import PageNotFound from './components/PageNotFound'
 
 import './App.css'
-import API from './API';
+import API from './API'
 
 class App extends Component {
   state = {
     username: ''
   }
 
-  signin = username => {
-    localStorage.setItem('username', username)
-    this.setState({ username })
+  signin = user => {
+    localStorage.setItem('token', user.token)
+    this.setState({ username: user.username })
   }
 
   signout = () => {
-    localStorage.removeItem('username')
+    localStorage.removeItem('token')
     this.setState({ username: '' })
-    this.props.history.push('/signin')
   }
 
   componentDidMount () {
-    const username = localStorage.username
-    if (username) {
-      API.validate(username)
-        .then(resp => {
-          if (!resp.error) {
-            this.signin(username)
-            this.props.history.push('/inventory')
-          } else {
-            alert(resp.error)
-          }
-        })
-    } else {
-      this.props.history.push('/signin')
-    }
+    API.validate()
+      .then(data => {
+        if (data.error) {
+          this.signout()
+        } else {
+          this.signin(data)
+          this.props.history.push('/inventory')
+        }
+      })
   }
 
   render() {
@@ -50,10 +42,10 @@ class App extends Component {
       <div className="App">
         <Header username={username} signout={signout} />
         <Switch>
-          <Route exact path='/' component={HomePage} />
-          <Route path='/signin' component={props => <SignInForm {...props} signin={signin} />} />
-          <Route path='/inventory' component={props => <Inventory {...props} username={username} />} />
-          <Route component={PageNotFound} />
+          <Route exact path='/' component={() => <h1>Home page!</h1>} />
+          <Route path='/signin' component={routerProps => <SignInForm signin={signin} {...routerProps} />} />
+          <Route path='/inventory' component={routerProps => <Inventory username={username} {...routerProps} />} />
+          <Route component={() => <h1>Page not found.</h1>} />
         </Switch>
       </div>
     )

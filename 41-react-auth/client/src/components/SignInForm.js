@@ -11,15 +11,18 @@ class SignInForm extends React.Component {
     password: ''
   }
 
-  handleSubmit = async event => {
-    event.preventDefault()
-    const resp = await API.signin(this.state)
-    if (resp.error) {
-      alert(resp.error)
-    } else {
-      this.props.signin(resp.username)
-      this.props.history.push('/inventory')
-    }
+  handleSubmit = () => {
+    const { signin, history } = this.props
+    const user = this.state
+    API.signin(user)
+      .then(data => {
+        if (data.error) {
+          alert('Wrong!!!!!!!!!!!')
+        } else {
+          signin(data)
+          history.push('/inventory')
+        }
+      })
   }
 
   handleChange = event =>

@@ -12,6 +12,7 @@ class App extends React.Component {
   }
 
   findPets = () => {
+    console.log('rendering pets!')
     const { type } = this.state.filters
     const url = type === 'all'
       ? '/api/pets'
@@ -39,6 +40,10 @@ class App extends React.Component {
 
   changeFilter = (event) => {
     this.setState({ filters: { type: event.target.value } })
+  }
+
+  componentDidMount () {
+    this.findPets()
   }
 
   render () {
